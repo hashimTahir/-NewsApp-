@@ -1,8 +1,5 @@
-<!--
-  ~ Copyright (c) 2020/  7/ 29.  Created by Hashim Tahir
-  -->
-
 <resources>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
