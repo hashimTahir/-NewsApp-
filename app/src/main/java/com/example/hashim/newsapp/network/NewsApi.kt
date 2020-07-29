@@ -4,6 +4,8 @@
 
 package com.example.hashim.newsapp.network
 
+import com.example.hashim.newsapp.models.NewsResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,7 +19,18 @@ interface NewsApi {
         hPageNumber: Int = 1,
         @Query(NetworkConstants.H_API_KEY_P)
         hApiKey: String = NetworkConstants.H_API_KEY
-    )
+    ): Response<NewsResponse>
+
+
+    @GET(NetworkConstants.H_GET_SEARCH_NEWS_URL)
+    suspend fun hSearchNews(
+        @Query(NetworkConstants.H_QUERY_P)
+        hSearchQuery: String,
+        @Query(NetworkConstants.H_PAGE_P)
+        hPageNumber: Int = 1,
+        @Query(NetworkConstants.H_API_KEY_P)
+        hApiKey: String = NetworkConstants.H_API_KEY
+    ): Response<NewsResponse>
 
 
 }
