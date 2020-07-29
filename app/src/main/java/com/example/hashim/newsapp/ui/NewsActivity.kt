@@ -28,7 +28,7 @@ class NewsActivity : AppCompatActivity() {
         hNewNavHostFragment =
             supportFragmentManager.findFragmentById(R.id.hNewsNavHostFragment) as NavHostFragment?
         hNavController = hNewNavHostFragment!!.navController
-        hNavController?.setGraph(R.navigation.main_nav_host_navigation)
+        hNavController.setGraph(R.navigation.main_nav_host_navigation)
         NavigationUI.setupWithNavController(hBottomNavigationView, hNavController)
 
     }
