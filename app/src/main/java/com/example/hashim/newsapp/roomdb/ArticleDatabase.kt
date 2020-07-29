@@ -22,19 +22,20 @@ abstract class ArticleDatabase : RoomDatabase() {
         private var hArticleDatabaseInstance: ArticleDatabase? = null
         private var H_LOCK = Any()
 
+        /*invoke runs when the object is initilized
+        * synchoronized lock dosent let anyone else access the object while its being accessed*/
         operator fun invoke(context: Context) =
             hArticleDatabaseInstance ?: synchronized(H_LOCK) {
                 hArticleDatabaseInstance
-                    ?: hCreateDataBase(context).also { it -> hArticleDatabaseInstance = it }
+                    ?: hCreateDataBase(context).also { hArticleDatabaseInstance = it }
             }
 
-        private fun hCreateDataBase(context: Context): () -> ArticleDatabase = {
+        private fun hCreateDataBase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
                 ArticleDatabase::class.java,
                 "ArticlesDb.db"
             ).build()
-        }
     }
-
 }
+
