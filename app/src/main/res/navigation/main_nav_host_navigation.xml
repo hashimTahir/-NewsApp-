@@ -12,7 +12,15 @@
         android:id="@+id/hBreakingNewsFragment"
         android:name="com.example.hashim.newsapp.ui.fragments.BreakingNewsFragment"
         android:label="fragment_breaking_news"
-        tools:layout="@layout/fragment_breaking_news" />
+        tools:layout="@layout/fragment_breaking_news" >
+        <action
+            android:id="@+id/action_hBreakingNewsFragment_to_hArticleFragment"
+            app:destination="@id/hArticleFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_in_right" />
+    </fragment>
     <fragment
         android:id="@+id/hSavedNewsFragment"
         android:name="com.example.hashim.newsapp.ui.fragments.SavedNewsFragment"

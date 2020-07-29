@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020/  7/ 29.  Created by Hashim Tahir
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/hBreakingNewsFragment"
+        android:icon="@drawable/ic_breaking_news"
+        android:title="Saved News" />
+    <item
+        android:id="@+id/hSavedNewsFragment"
+        android:icon="@drawable/ic_favorite"
+        android:title="Breaking News" />
+    <item
+        android:id="@+id/hSearchNewsFragment"
+        android:icon="@drawable/ic_all_news"
+        android:title="Search News" />
+
+</menu>
