@@ -9,7 +9,7 @@ import com.example.hashim.newsapp.models.Source
 
 
 /*Used to convert custom objects to and from for the db which only can store primitive data types*/
-class TypeConverters {
+class Converters {
     @TypeConverter
     fun hConvertFromSource(hSource: Source): String {
         return hSource.name
