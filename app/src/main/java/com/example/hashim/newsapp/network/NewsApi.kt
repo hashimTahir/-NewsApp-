@@ -10,7 +10,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface NewsApi {
-
+    /*suspend used by coroutines*/
     @GET(NetworkConstants.H_GET_NEWS_URL)
     suspend fun hGetBreakingNews(
         @Query(NetworkConstants.H_COUNTRY_P)

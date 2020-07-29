@@ -4,7 +4,17 @@
 
 package com.example.hashim.newsapp.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(
+    tableName = "Articles"
+)
 data class Article(
+    /*? means its nullable*/
+    @PrimaryKey(autoGenerate = true)
+    var hKey: Int? = null,
+
     val author: String,
     val content: String,
     val description: String,
