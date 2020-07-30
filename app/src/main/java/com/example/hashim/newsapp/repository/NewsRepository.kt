@@ -6,7 +6,7 @@ package com.example.hashim.newsapp.repository
 
 import com.example.hashim.newsapp.roomdb.ArticleDatabase
 
-class NewRepository(
+class NewsRepository(
     val hDatabase: ArticleDatabase
 ) {
 

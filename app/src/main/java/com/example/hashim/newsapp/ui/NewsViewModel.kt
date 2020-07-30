@@ -5,10 +5,10 @@
 package com.example.hashim.newsapp.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.hashim.newsapp.repository.NewRepository
+import com.example.hashim.newsapp.repository.NewsRepository
 
 class NewsViewModel(
-    val hNewsRepository: NewRepository
+    val hNewsRepository: NewsRepository
 ) : ViewModel() {
 
 }
