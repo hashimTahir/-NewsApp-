@@ -19,6 +19,7 @@ import com.example.hashim.newsapp.repository.NewsRepository
 import com.example.hashim.newsapp.utils.ResponseResource
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import java.io.IOException
 
 class NewsViewModel(
     private val hApplication: Application,
@@ -41,18 +42,52 @@ class NewsViewModel(
     public fun hGetBreakingNews(hCountryCode: String) {
         viewModelScope.launch {
             hBreakingNewsMutableLiveData.value = ResponseResource.Loading()
-            val hBreakingNewsResponse =
-                hNewsRepository.hGetBreakingNews(hCountryCode, hBreakingNewsPageNo)
-            hBreakingNewsMutableLiveData.value = hHandleBreakingNewsResposne(hBreakingNewsResponse)
+            try {
+                if (hHasInternet()) {
+                    val hBreakingNewsResponse =
+                        hNewsRepository.hGetBreakingNews(hCountryCode, hBreakingNewsPageNo)
+                    hBreakingNewsMutableLiveData.value =
+                        hHandleBreakingNewsResposne(hBreakingNewsResponse)
+                } else {
+                    hBreakingNewsMutableLiveData.value =
+                        ResponseResource.Error("No internet connection")
+                }
+
+            } catch (t: Throwable) {
+                when (t) {
+                    is IOException -> hBreakingNewsMutableLiveData.value =
+                        ResponseResource.Error("Network failure")
+                    else -> hBreakingNewsMutableLiveData.value =
+                        ResponseResource.Error("Conversion Error")
+                }
+            }
+
         }
     }
 
     fun hSearchNews(hQuery: String) {
         viewModelScope.launch {
             hSearchNewsMutableLiveData.value = ResponseResource.Loading()
-            val hSearchNewsResponse =
-                hNewsRepository.hSearchNews(hQuery, hSearchNewsPageNo)
-            hSearchNewsMutableLiveData.value = hHandleSearchNewsResposne(hSearchNewsResponse)
+            try {
+                if (hHasInternet()) {
+                    val hSearchNewsResponse =
+                        hNewsRepository.hSearchNews(hQuery, hSearchNewsPageNo)
+                    hSearchNewsMutableLiveData.value =
+                        hHandleSearchNewsResposne(hSearchNewsResponse)
+                } else {
+                    hBreakingNewsMutableLiveData.value =
+                        ResponseResource.Error("No internet connection")
+                }
+
+            } catch (t: Throwable) {
+                when (t) {
+                    is IOException -> hBreakingNewsMutableLiveData.value =
+                        ResponseResource.Error("Network failure")
+                    else -> hBreakingNewsMutableLiveData.value =
+                        ResponseResource.Error("Conversion Error")
+                }
+            }
+
         }
     }
 
