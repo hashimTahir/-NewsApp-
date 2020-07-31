@@ -37,12 +37,12 @@ class NewsViewModel(
         }
     }
 
-    public fun hSearchNews(hQuery: String) {
+    fun hSearchNews(hQuery: String) {
         viewModelScope.launch {
             hSearchNewsMutableLiveData.value = ResponseResource.Loading()
             val hSearchNewsResponse =
                 hNewsRepository.hSearchNews(hQuery, hSearchNewsPageNo)
-            hBreakingNewsMutableLiveData.value = hHandleSearchNewsResposne(hSearchNewsResponse)
+            hSearchNewsMutableLiveData.value = hHandleSearchNewsResposne(hSearchNewsResponse)
         }
     }
 
