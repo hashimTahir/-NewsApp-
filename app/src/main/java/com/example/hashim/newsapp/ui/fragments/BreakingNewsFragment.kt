@@ -9,7 +9,9 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hashim.newsapp.Constants
 import com.example.hashim.newsapp.R
 import com.example.hashim.newsapp.adapters.NewsAdapter
 import com.example.hashim.newsapp.ui.NewsViewModel
@@ -51,6 +53,10 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hInitRecycler()
+        hSubscribeObservers()
+    }
+
+    private fun hSubscribeObservers() {
         hNewsViewModel.hBreakingNewsMutableLiveData.observe(
             viewLifecycleOwner,
             Observer { hResponseResouce ->
@@ -86,6 +92,15 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     private fun hInitRecycler() {
         hNewsAdapter = NewsAdapter()
+        hNewsAdapter.hSetRecyclerCallBack { hArticle ->
+            val hBundle = Bundle().apply {
+                this.putSerializable(Constants.H_ARTICLE_IC, hArticle)
+            }
+            findNavController().navigate(
+                R.id.action_hBreakingNewsFragment_to_hArticleFragment,
+                hBundle
+            )
+        }
         rvBreakingNews.apply {
             adapter = hNewsAdapter
             layoutManager = LinearLayoutManager(requireContext())

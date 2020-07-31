@@ -9,7 +9,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.hashim.newsapp.R
-import com.example.hashim.newsapp.ui.NewsActivity
 import com.example.hashim.newsapp.ui.NewsViewModel
 
 
@@ -22,6 +21,17 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
     private var param2: String? = null
     private val hNewsViewModel: NewsViewModel by activityViewModels()
 
+    companion object {
+
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            BreakingNewsFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +45,4 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BreakingNewsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

@@ -6,11 +6,11 @@
     <item
         android:id="@+id/hBreakingNewsFragment"
         android:icon="@drawable/ic_breaking_news"
-        android:title="Saved News" />
+        android:title="Breaking News" />
     <item
         android:id="@+id/hSavedNewsFragment"
         android:icon="@drawable/ic_favorite"
-        android:title="Breaking News" />
+        android:title="Saved News" />
     <item
         android:id="@+id/hSearchNewsFragment"
         android:icon="@drawable/ic_all_news"
