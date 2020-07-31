@@ -4,10 +4,15 @@
 
 package com.example.hashim.newsapp.ui
 
+import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hashim.newsapp.ApplicationClass
 import com.example.hashim.newsapp.models.Article
 import com.example.hashim.newsapp.models.NewsResponse
 import com.example.hashim.newsapp.repository.NewsRepository
@@ -16,8 +21,9 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class NewsViewModel(
+    private val hApplication: Application,
     private val hNewsRepository: NewsRepository
-) : ViewModel() {
+) : AndroidViewModel(hApplication) {
     val hBreakingNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
         MutableLiveData()
     public var hBreakingNewsPageNo = 1
@@ -101,5 +107,22 @@ class NewsViewModel(
         viewModelScope.launch {
             hNewsRepository.hDeleteArticle(hArticle)
         }
+    }
+
+
+    private fun hHasInternet(): Boolean {
+        val hConnectivityManager =
+            getApplication<ApplicationClass>().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val hActiveNetwork = hConnectivityManager.activeNetwork
+        hActiveNetwork ?: return false
+        val hCapabilities =
+            hConnectivityManager.getNetworkCapabilities(hActiveNetwork) ?: return false
+        return when {
+            hCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            hCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            hCapabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+
     }
 }
