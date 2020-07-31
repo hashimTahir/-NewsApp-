@@ -14,21 +14,49 @@ import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class NewsViewModel(
-    val hNewsRepository: NewsRepository
+    private val hNewsRepository: NewsRepository
 ) : ViewModel() {
     val hBreakingNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
         MutableLiveData()
-    var hPageNo = 1
+    private var hBreakingNewsPageNo = 1
 
-    fun hGetBreakingNews(hCountryCode: String) {
+    val hSearchNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
+        MutableLiveData()
+    private var hSearchNewsPageNo = 1
+
+    init {
+        hGetBreakingNews("us")
+    }
+
+    private fun hGetBreakingNews(hCountryCode: String) {
         viewModelScope.launch {
             hBreakingNewsMutableLiveData.value = ResponseResource.Loading()
-            var hBreakingNewsResponseResource =
-                hNewsRepository.hGetBreakingNews(hCountryCode, hPageNo)
+            val hBreakingNewsResponse =
+                hNewsRepository.hGetBreakingNews(hCountryCode, hBreakingNewsPageNo)
+            hBreakingNewsMutableLiveData.value = hHandleBreakingNewsResposne(hBreakingNewsResponse)
         }
     }
 
+    fun hSearchNews(hQuery: String) {
+        viewModelScope.launch {
+            hSearchNewsMutableLiveData.value = ResponseResource.Loading()
+            val hSearchNewsResponse =
+                hNewsRepository.hSearchNews(hQuery, hSearchNewsPageNo)
+            hSearchNewsMutableLiveData.value = hHandleSearchNewsResposne(hSearchNewsResponse)
+        }
+    }
+
+
     private fun hHandleBreakingNewsResposne(hResponse: Response<NewsResponse>): ResponseResource<NewsResponse> {
+        if (hResponse.isSuccessful) {
+            hResponse.body()?.let { newsResponse ->
+                return ResponseResource.Success(newsResponse)
+            }
+        }
+        return ResponseResource.Error(hResponse.message())
+    }
+
+    private fun hHandleSearchNewsResposne(hResponse: Response<NewsResponse>): ResponseResource<NewsResponse> {
         if (hResponse.isSuccessful) {
             hResponse.body()?.let { newsResponse ->
                 return ResponseResource.Success(newsResponse)
