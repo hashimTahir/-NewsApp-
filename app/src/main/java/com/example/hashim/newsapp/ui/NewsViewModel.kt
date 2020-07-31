@@ -20,7 +20,7 @@ class NewsViewModel(
 ) : ViewModel() {
     val hBreakingNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
         MutableLiveData()
-    private var hBreakingNewsPageNo = 1
+    public var hBreakingNewsPageNo = 1
     private var hBreakingNewsResponse: NewsResponse? = null
 
     val hSearchNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
@@ -32,7 +32,7 @@ class NewsViewModel(
         hGetBreakingNews("us")
     }
 
-    private fun hGetBreakingNews(hCountryCode: String) {
+    public fun hGetBreakingNews(hCountryCode: String) {
         viewModelScope.launch {
             hBreakingNewsMutableLiveData.value = ResponseResource.Loading()
             val hBreakingNewsResponse =

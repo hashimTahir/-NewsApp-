@@ -31,6 +31,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
     private lateinit var hNewsAdapter: NewsAdapter
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hInitRecycler()

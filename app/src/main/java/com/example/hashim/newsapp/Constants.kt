@@ -9,6 +9,7 @@ class Constants {
         const val H_500MILLS_DELAY = 500L
         const val hTag = "hashimTimberTags %s"
         const val H_ARTICLE_IC = "hArticle"
+        const val H_PAGE_SIZE = 20
     }
 
 }
