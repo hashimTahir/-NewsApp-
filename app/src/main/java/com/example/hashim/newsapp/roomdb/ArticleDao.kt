@@ -10,6 +10,7 @@ import com.example.hashim.newsapp.models.Article
 
 @Dao
 interface ArticleDao {
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun hUpsertArticle(hArticle: Article): Long
 
