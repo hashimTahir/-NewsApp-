@@ -22,7 +22,7 @@ import retrofit2.Response
 import java.io.IOException
 
 class NewsViewModel(
-    private val hApplication: Application,
+    hApplication: Application,
     private val hNewsRepository: NewsRepository
 ) : AndroidViewModel(hApplication) {
     val hBreakingNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
