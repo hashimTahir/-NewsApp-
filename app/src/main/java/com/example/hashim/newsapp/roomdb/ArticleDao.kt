@@ -15,9 +15,9 @@ interface ArticleDao {
     suspend fun hUpsertArticle(hArticle: Article): Long
 
     @Query(RoomQuerys.H_SELECT_ALL_ARTICLES)
-    fun hGetAllArticles(): LiveData<List<Article>>
+    fun hGetSavedArticles(): LiveData<List<Article>>
 
     @Delete
-    fun hDeleteArticle(hArticle: Article)
+    suspend fun hDeleteArticle(hArticle: Article)
 
 }

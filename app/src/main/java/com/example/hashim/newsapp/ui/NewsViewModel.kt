@@ -4,9 +4,11 @@
 
 package com.example.hashim.newsapp.ui
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hashim.newsapp.models.Article
 import com.example.hashim.newsapp.models.NewsResponse
 import com.example.hashim.newsapp.repository.NewsRepository
 import com.example.hashim.newsapp.utils.ResponseResource
@@ -63,5 +65,22 @@ class NewsViewModel(
             }
         }
         return ResponseResource.Error(hResponse.message())
+    }
+
+
+    fun hSaveArticle(hArticle: Article) {
+        viewModelScope.launch {
+            hNewsRepository.hUpSertInDb(hArticle)
+        }
+    }
+
+    fun hGetSavedNews(): LiveData<List<Article>> {
+        return hNewsRepository.hGetSavedArticles()
+    }
+
+    fun hDeleteArticle(hArticle: Article) {
+        viewModelScope.launch {
+            hNewsRepository.hDeleteArticle(hArticle)
+        }
     }
 }

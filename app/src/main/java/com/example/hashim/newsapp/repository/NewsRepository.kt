@@ -26,11 +26,11 @@ class NewsRepository(
         return hDatabase.hGetArticleDao().hUpsertArticle(hArticle)
     }
 
-    fun hGetAllArticles(hArticle: Article): LiveData<List<Article>> {
-        return hDatabase.hGetArticleDao().hGetAllArticles()
+    fun hGetSavedArticles(): LiveData<List<Article>> {
+        return hDatabase.hGetArticleDao().hGetSavedArticles()
     }
 
-    fun hDeleteArticle(hArticle: Article) {
+    suspend fun hDeleteArticle(hArticle: Article) {
         hDatabase.hGetArticleDao().hDeleteArticle(hArticle)
     }
 
