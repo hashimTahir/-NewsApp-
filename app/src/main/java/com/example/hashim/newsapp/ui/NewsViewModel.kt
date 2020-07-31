@@ -25,7 +25,7 @@ class NewsViewModel(
 
     val hSearchNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
         MutableLiveData()
-    private var hSearchNewsPageNo = 1
+    public var hSearchNewsPageNo = 1
     private var hSearchNewsResponse: NewsResponse? = null
 
     init {

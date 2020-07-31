@@ -78,6 +78,9 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                             hNewsAdapter.hAsyncListDiffer.submitList(newsResponse.articles.toList())
                             val hTotalPages = newsResponse.totalResults / Constants.H_PAGE_SIZE + 2
                             hIsLastPage = hNewsViewModel.hBreakingNewsPageNo == hTotalPages
+                            if (hIsLastPage) {
+                                rvBreakingNews.setPadding(0, 0, 0, 0)
+                            }
                         }
                     }
                     is ResponseResource.Error -> {
