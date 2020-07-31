@@ -10,8 +10,6 @@ import com.example.hashim.newsapp.R
 import com.example.hashim.newsapp.ui.NewsViewModel
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {

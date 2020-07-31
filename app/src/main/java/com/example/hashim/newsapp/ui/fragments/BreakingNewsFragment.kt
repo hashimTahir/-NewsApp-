@@ -20,13 +20,8 @@ import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import timber.log.Timber
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
-    private var param1: String? = null
-    private var param2: String? = null
+
     private val hNewsViewModel: NewsViewModel by activityViewModels()
     private lateinit var hNewsAdapter: NewsAdapter
 

@@ -25,13 +25,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
-    private var param1: String? = null
-    private var param2: String? = null
+
     private val hNewsViewModel: NewsViewModel by activityViewModels()
     private lateinit var hNewsAdapter: NewsAdapter
 
