@@ -30,25 +30,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     private val hNewsViewModel: NewsViewModel by activityViewModels()
     private lateinit var hNewsAdapter: NewsAdapter
 
-    companion object {
-
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            BreakingNewsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
