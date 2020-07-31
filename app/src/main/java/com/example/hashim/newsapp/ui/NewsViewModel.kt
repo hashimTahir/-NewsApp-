@@ -21,10 +21,12 @@ class NewsViewModel(
     val hBreakingNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
         MutableLiveData()
     private var hBreakingNewsPageNo = 1
+    private var hBreakingNewsResponse: NewsResponse? = null
 
     val hSearchNewsMutableLiveData: MutableLiveData<ResponseResource<NewsResponse>> =
         MutableLiveData()
     private var hSearchNewsPageNo = 1
+    private var hSearchNewsResponse: NewsResponse? = null
 
     init {
         hGetBreakingNews("us")
@@ -52,7 +54,15 @@ class NewsViewModel(
     private fun hHandleBreakingNewsResposne(hResponse: Response<NewsResponse>): ResponseResource<NewsResponse> {
         if (hResponse.isSuccessful) {
             hResponse.body()?.let { newsResponse ->
-                return ResponseResource.Success(newsResponse)
+                hBreakingNewsPageNo++
+                if (hBreakingNewsResponse == null) {
+                    hBreakingNewsResponse = newsResponse
+                } else {
+                    val hOldArticles = hBreakingNewsResponse?.articles
+                    val hNewArticles = newsResponse.articles
+                    hOldArticles?.addAll(hNewArticles)
+                }
+                return ResponseResource.Success(hBreakingNewsResponse ?: newsResponse)
             }
         }
         return ResponseResource.Error(hResponse.message())
@@ -61,7 +71,16 @@ class NewsViewModel(
     private fun hHandleSearchNewsResposne(hResponse: Response<NewsResponse>): ResponseResource<NewsResponse> {
         if (hResponse.isSuccessful) {
             hResponse.body()?.let { newsResponse ->
-                return ResponseResource.Success(newsResponse)
+                hSearchNewsPageNo++
+                if (hSearchNewsResponse == null) {
+                    hSearchNewsResponse = newsResponse
+                } else {
+                    val hOldArticles = hSearchNewsResponse?.articles
+                    val hNewArticles = newsResponse.articles
+                    hOldArticles?.addAll(hNewArticles)
+                }
+
+                return ResponseResource.Success(hSearchNewsResponse ?: newsResponse)
             }
         }
         return ResponseResource.Error(hResponse.message())
