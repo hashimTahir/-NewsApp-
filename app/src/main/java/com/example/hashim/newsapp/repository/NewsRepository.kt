@@ -16,4 +16,8 @@ class NewsRepository(
         return RetrofitInstance.hNewsApi.hGetBreakingNews(hCountryCode, hPageNo)
     }
 
+    suspend fun hSearchNews(hQuery: String, hPageNo: Int): Response<NewsResponse> {
+        return RetrofitInstance.hNewsApi.hGetBreakingNews(hQuery, hPageNo)
+    }
+
 }
